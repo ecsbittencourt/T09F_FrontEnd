@@ -1,0 +1,39 @@
+.caixa {
+  position: relative;
+  max-width: 220px;
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 1.2rem;
+  background-color: var(--cor-cinza);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.input {
+ background-color: var(--cor-cinza);
+   border: none;
+
+}
+
+.input::placeholder{
+    color: var(--cor-preto);
+}
+
+.lupa{
+    width: 15px;
+}
+
+.input:focus{
+    outline: none;
+}
+
+.caixa button{
+    background: none;
+    border: none;
+}
+
+
+
+
