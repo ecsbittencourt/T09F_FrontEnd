@@ -19,4 +19,12 @@
     height: 100%;
 }
 
+#nav-barra-lateral ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
+#nav-bar-exit-icon {
+    width: 2rem;
+}
