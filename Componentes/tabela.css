@@ -1,0 +1,20 @@
+.tabela-listagem {
+    overflow-x: scroll;
+    width: 100%;
+
+}
+
+.tabela-listagem-head-row>th, .tabela-listagem-body-row>td {
+    color: var(--cor-primaria);
+    text-align: center;
+}
+
+.tabela-listagem button {
+    border: none;
+    background: none;
+}
+
+.tabela-listagem-edit-remove-icons {
+    display: flex;
+    gap: .6rem;
+}
