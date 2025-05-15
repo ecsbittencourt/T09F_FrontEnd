@@ -1,7 +1,6 @@
 .input {
     display: flex;
     justify-content: space-between;
-    max-width: 30%;
     width: 100%;
     height: 4rem;
     border:none;
