@@ -1,0 +1,22 @@
+#barra-lateral{
+    position: fixed;
+    height: 100%;
+    width: 18%;
+    background-color: var(--cor-primaria);
+
+}
+#nav-barra-lateral li{
+    color: var(--cor-branco);
+    font-weight: 700;
+
+}
+
+#conteudo-barra-lateral{
+    padding: 10.4rem 0rem 5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+

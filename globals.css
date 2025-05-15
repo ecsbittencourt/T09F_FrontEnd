@@ -16,7 +16,7 @@
   box-sizing: border-box;
 }
 html{
-    font-size: 16px;
+    font-size: 12px;
     font-family: "Inter", sans-serif;
   }
 
@@ -38,3 +38,15 @@ html{
 .paragrafo3{
   font-size: 1rem;
 }
+
+body{
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+ul, ol {
+  list-style: none;      /* Remove os marcadores (bullets ou números) */
+  padding: 0;            /* Remove o recuo padrão */
+  margin: 0;             /* Remove a margem padrão */
+}
+
