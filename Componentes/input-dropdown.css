@@ -1,0 +1,11 @@
+.input-dropdown select {
+    background: none;
+    border:none;
+    width: 100%;
+}
+
+.input-dropdown select {
+    outline:none;
+}
+
+
