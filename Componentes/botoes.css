@@ -1,0 +1,14 @@
+.botao {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--cor-primaria);
+            color:white;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 5px ;
+            transition: background-color 0.3s;
+        }
+        .botão:hover{
+            background-color:var(--cor-primaria);
+        }
