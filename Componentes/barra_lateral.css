@@ -12,7 +12,11 @@
 }
 
 #conteudo-barra-lateral{
-    padding: 20.4rem 0rem 5rem 4.75rem;
+    padding: 10.4rem 0rem 5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 
 }
 
