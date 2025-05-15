@@ -4,6 +4,7 @@
   height: 2.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   border-radius: 1.2rem;
   background-color: var(--cor-cinza);
@@ -14,6 +15,7 @@
 .input {
  background-color: var(--cor-cinza);
    border: none;
+   height: 100%;
 
 }
 

@@ -55,3 +55,6 @@ ul, ol {
   margin: 0;             /* Remove a margem padrão */
 }
 
+button:hover {
+  cursor: pointer;
+}
