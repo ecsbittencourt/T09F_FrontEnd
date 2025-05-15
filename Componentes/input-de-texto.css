@@ -14,6 +14,7 @@
 .input::placeholder {
     color: var(--cor-preto);
     font-family: "Inter", sans-serif;
+    font-size: 1.2rem;
     font-weight: 400;
 
 }

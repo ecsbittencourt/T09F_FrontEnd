@@ -2,10 +2,8 @@
     background: none;
     border:none;
     width: 100%;
-}
-
-.input-dropdown select {
     outline:none;
+    font-size: 1.2rem;
 }
 
 
