@@ -1,13 +1,13 @@
 .tabela-listagem {
-    overflow-x: scroll;
     width: 100%;
-
+    border-collapse: separate;
+    border-spacing: 1rem 0;
 }
 
 .tabela-listagem-head-row>th, .tabela-listagem-body-row>td {
     color: var(--cor-primaria);
     text-align: center;
-    text-wrap: none;
+    white-space: nowrap;
 }
 
 .tabela-listagem button {
