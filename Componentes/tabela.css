@@ -7,11 +7,17 @@
 .tabela-listagem-head-row>th, .tabela-listagem-body-row>td {
     color: var(--cor-primaria);
     text-align: center;
+    text-wrap: none;
 }
 
 .tabela-listagem button {
     border: none;
     background: none;
+    width: 1rem;
+}
+
+.tabela-listagem button>img {
+    width: 100%;
 }
 
 .tabela-listagem-edit-remove-icons {
