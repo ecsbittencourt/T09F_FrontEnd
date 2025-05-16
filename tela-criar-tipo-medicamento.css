@@ -30,20 +30,20 @@ p.paragrafo1 {
     flex-direction: column;
     gap: .5rem;
 }
-.tela-criar-tipo-estoque-botoes-div {
+.tela-criar-tipo-medicamento-botoes-div {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.tela-criar-tipo-estoque-botoes-div>.botao {
+.tela-criar-tipo-medicamento-botoes-div>.botao {
     max-width: 20%;
     height: 3.5rem;
     width: 100%;
 }
 
-.tela-criar-tipo-estoque-botoes-div .botao-branco {
+.tela-criar-tipo-medicamento-botoes-div .botao-branco {
     background-color: var(--cor-branco);
     border: .2rem solid var(--cor-primaria);
     color: var(--cor-primaria);
