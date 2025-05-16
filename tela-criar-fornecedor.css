@@ -1,0 +1,72 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: 20%;
+}
+
+p.paragrafo1 {
+    color: black;
+}
+
+.main-content {
+    max-width: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+.main-content-options-div {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.tela-criar-fornecedor-botoes-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tela-criar-fornecedor-botoes-div>.botao {
+    max-width: 20%;
+    height: 3.5rem;
+    width: 100%;
+}
+
+.tela-criar-fornecedor-botoes-div .botao-branco {
+    background-color: var(--cor-branco);
+    border: .2rem solid var(--cor-primaria);
+    color: var(--cor-primaria);
+}
+
+@media screen and (max-width: 1100px) {
+    html {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 940px) {
+    
+    #barra-lateral {
+        max-width: 30%;
+    }
+    main {
+        margin-left: 30%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 8px;
+    }
+}
