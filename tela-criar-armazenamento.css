@@ -30,20 +30,20 @@ p.paragrafo1 {
     flex-direction: column;
     gap: .5rem;
 }
-.tela-cadastrar-estoque-botoes-div {
+.tela-cadastrar-armazenamento-botoes-div {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.tela-cadastrar-estoque-botoes-div>.botao {
+.tela-cadastrar-armazenamento-botoes-div>.botao {
     max-width: 20%;
     height: 3.5rem;
     width: 100%;
 }
 
-.tela-cadastrar-estoque-botoes-div .botao-branco {
+.tela-cadastrar-armazenamento-botoes-div .botao-branco {
     background-color: var(--cor-branco);
     border: .2rem solid var(--cor-primaria);
     color: var(--cor-primaria);
