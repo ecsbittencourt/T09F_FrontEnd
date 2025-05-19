@@ -87,6 +87,7 @@ p.paragrafo1 {
     justify-content: center;
     align-items: center;
     width: 50%;
+    
 }
 
 .borda-interna table {
@@ -120,7 +121,7 @@ td {
     display: flex;
     flex-direction: column;
     gap: .8rem;
-    align-items:flex-start;
+    align-items:center;
     
 }
 
@@ -135,7 +136,9 @@ td button {
 
 div.borda-interna {
     max-height: 40%;
-    overflow-y: auto;
+    overflow-y: auto; 
+    border: 1px solid blue;
+    margin-bottom: 10px;
 }
 @media screen and (max-width: 1100px) {
     html {
