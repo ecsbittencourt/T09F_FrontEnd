@@ -13,7 +13,7 @@
 }
 
 #conteudo-barra-lateral{
-    padding: 10.4rem 0rem 5rem 2.5rem;
+    padding: 5.4rem 0rem 5rem 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,7 +23,7 @@
 #nav-barra-lateral ul {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 #nav-bar-exit-icon {
