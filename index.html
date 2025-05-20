@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +7,23 @@
     <link rel="stylesheet" href="/Componentes/botoes.css">
     <link rel="stylesheet" href="/tela-login.css">
     <title>Login</title>
+    <script src="script.js"></script>
 </head>
 
 <body>
-
     <div class="div-caixa-login">
         <div class="caixa-login">
-            <input type="text" placeholder="Usuário" class="login-input">
-            <input type="password" placeholder="Senha" class="login-input">
 
+            <input type="text" id="login-input" placeholder="Usuário" class="login-input">
+            <input type="password" id="senha-input" placeholder="Senha" class="login-input">
             <div class="grupo-botoes">
-                <a href="/listar-medicamentos/tela-listar-medicamentos.html"><button class="botao">Login</button></a>
-                <a href="/listar-medicamentos/tela-listar-medicamentos.html"><button class="botao">Criar</button></a>
+            <a href="#" onclick="validarLogin(event)"><button class="botao">Login</button></a>
+            <a href="/listar-medicamentos/tela-listar-medicamentos.html"><button class="botao">Criar</button></a>
             </div>
         </div>
     </div>
-
-
-
     <div class="div-azul">
         <img src="/Recursos/software-logo.svg" alt="Imagem hospital">
     </div>
-
-
-
 </body>
-
 </html>
