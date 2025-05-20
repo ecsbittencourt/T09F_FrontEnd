@@ -1,5 +1,5 @@
 const handleCreateEvent = (event) => {
-    let currPapeis = JSON.parse(localStorage.getItem("papeis"));
+    let currPapeis = JSON.parse(localStorage.getItem("t09f_papeis"));
     let papel = document.getElementById("input-papel").value;
     if(!papel) {
         event.preventDefault();
@@ -7,14 +7,14 @@ const handleCreateEvent = (event) => {
         return;
     }
     if (!Array.isArray(currPapeis)) {
-        localStorage.setItem("papeis", JSON.stringify([papel]));
+        localStorage.setItem("t09f_papeis", JSON.stringify([papel]));
     } else {
         if(currPapeis.includes(papel)) {
             event.preventDefault();
             alert("Papel já existe!");
             return;
         }
-        localStorage.setItem("papeis", JSON.stringify([...currPapeis, papel]));
+        localStorage.setItem("t09f_papeis", JSON.stringify([...currPapeis, papel]));
         return;
     }
 }
