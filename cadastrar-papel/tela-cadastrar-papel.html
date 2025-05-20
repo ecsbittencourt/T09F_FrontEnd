@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/Componentes/input-dropdown.css">
     <link rel="stylesheet" href="./tela-cadastrar-papel.css">
     <link rel="stylesheet" href="/Componentes/botoes.css">
-
 </head>
 
 <body>
@@ -36,16 +35,17 @@
     <main>
         <div class="main-content">
             <div class="main-content-options-div">
-                <input class="input input-de-texto" type="text" placeholder="Nome do papel">
+                <input id="input-papel" class="input input-de-texto" type="text" placeholder="Nome do papel">
                 
             </div>
             <div class="tela-cadastrar-papel-botoes-div">
-                <button class="botao">Criar</button>
-                <button class="botao botao-branco">Cancelar</button>
+                <button id="botao-criar-papel" class="botao">Criar</button>
+                <button class="botao botao-branco"><a href="/listar-medicamentos/tela-listar-medicamentos.html">Cancelar</a></button>
             </div>
 
         </div>
     </main>
+    <script src="./tela-cadastrar-papel.js"></script>
 </body>
 
 </html>
