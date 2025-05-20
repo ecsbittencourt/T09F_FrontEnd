@@ -10,49 +10,55 @@
     <link rel="stylesheet" href="/Componentes/input-dropdown.css">
     <link rel="stylesheet" href="./tela-cadastrar-sala.css">
     <link rel="stylesheet" href="/Componentes/botoes.css">
+    <script src="script.js"></script>
 
 </head>
 
 <body>
     <aside id="barra-lateral">
-            <div id="conteudo-barra-lateral">
-                <nav id="nav-barra-lateral">
-                    <ul>
-                        <li class="paragrafo1"><a href="/listar-estoques/tela-listar-estoques.html">Estoques</a></li>
-                        <li class="paragrafo1"><a href="/listar-fornecedores/tela-listar-fornecedores.html">Fornecedores</a></li>
-                        <li class="paragrafo1"><a href="/listar-medicamentos/tela-listar-medicamentos.html">Medicamentos</a></li>
-                        <li class="paragrafo1"><a href="/listar-setores/tela-listar-setores.html">Setor</a></li>
-                        <li class="paragrafo1"><a href="/listar-salas/tela-listar-salas.html">Salas</a></li>
-                        <li class="paragrafo1"><a href="/listar-armazenamentos/tela-listar-armazenamentos.html">Armazenamentos</a></li>
-                        <li class="paragrafo1"><a href="/listar-notas-fiscais/tela-listar-nota-fiscal.html">Notas fiscais</a></li>
-                        <li class="paragrafo1"><a href="/listar-tipo-armazenamento/tela-listar-tipo-armazenamento.html">Tipo Armazenamento</a></li>
-                        <li class="paragrafo1"><a href="/listar-tipo-estoque/tela-listar-tipo-estoque.html">Tipo Estoque</a></li>
-                        <li class="paragrafo1"><a href="/listar-tipo-medicamentos/tela-listar-tipo-medicamento.html">Tipo Medicamento</a></li>
-                    </ul>
-                </nav>
-                <a href="/index.html"><img id="nav-bar-exit-icon" src="/Recursos/exit-icon.svg" alt="Icone sair"></a>
-            </div>
-        </aside>
+        <div id="conteudo-barra-lateral">
+            <nav id="nav-barra-lateral">
+                <ul>
+                    <li class="paragrafo1"><a href="/listar-estoques/tela-listar-estoques.html">Estoques</a></li>
+                    <li class="paragrafo1"><a href="/listar-fornecedores/tela-listar-fornecedores.html">Fornecedores</a>
+                    </li>
+                    <li class="paragrafo1"><a href="/listar-medicamentos/tela-listar-medicamentos.html">Medicamentos</a>
+                    </li>
+                    <li class="paragrafo1"><a href="/listar-setores/tela-listar-setores.html">Setor</a></li>
+                    <li class="paragrafo1"><a href="/listar-salas/tela-listar-salas.html">Salas</a></li>
+                    <li class="paragrafo1"><a
+                            href="/listar-armazenamentos/tela-listar-armazenamentos.html">Armazenamentos</a></li>
+                    <li class="paragrafo1"><a href="/listar-notas-fiscais/tela-listar-nota-fiscal.html">Notas
+                            fiscais</a></li>
+                    <li class="paragrafo1"><a href="/listar-tipo-armazenamento/tela-listar-tipo-armazenamento.html">Tipo
+                            Armazenamento</a></li>
+                    <li class="paragrafo1"><a href="/listar-tipo-estoque/tela-listar-tipo-estoque.html">Tipo Estoque</a>
+                    </li>
+                    <li class="paragrafo1"><a href="/listar-tipo-medicamentos/tela-listar-tipo-medicamento.html">Tipo
+                            Medicamento</a></li>
+                </ul>
+            </nav>
+            <a href="/index.html"><img id="nav-bar-exit-icon" src="/Recursos/exit-icon.svg" alt="Icone sair"></a>
+        </div>
+    </aside>
     <main>
         <div class="main-content">
             <div class="input input-dropdown">
-                <select class="dropdown" name="options">
+                <select class="dropdown" id="opcoes" name="options">
                     <option value="" disabled selected hidden>Setor</option>
-                    <option value="Opção 1">Setor 1</option>
-                    <option value="Opção 2">Setor 2</option>
-                    <option value="Opção 3">Setor 3</option>
                 </select>
             </div>
             <div class="main-content-options-div">
-                <input class="input input-de-texto" type="text" placeholder="Nome da Sala">
+                <input class="input input-de-texto" id="nomeNovaSala" type="text" placeholder="Nome da Sala">
             </div>
             <div class="tela-cadastrar-sala-botoes-div">
-                <button class="botao">Criar</button>
+                <button class="botao" onclick="CadastrarSala()">Criar</button>
                 <button class="botao botao-branco">Voltar</button>
             </div>
 
         </div>
     </main>
+
 </body>
 
 </html>
