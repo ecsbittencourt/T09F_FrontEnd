@@ -43,6 +43,10 @@ p.paragrafo1 {
     width: 100%;
 }
 
+.tela-criar-tipo-estoque-botoes-div a {
+    color: var(--cor-primaria);
+}
+
 .tela-criar-tipo-estoque-botoes-div .botao-branco {
     background-color: var(--cor-branco);
     border: .2rem solid var(--cor-primaria);
