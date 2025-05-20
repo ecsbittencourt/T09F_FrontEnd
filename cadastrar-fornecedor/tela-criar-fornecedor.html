@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/globals.css">
-        <link rel="stylesheet" href="/Componentes/barra_lateral.css">
-    </head>
-    <body>
-        <aside id="barra-lateral">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/globals.css">
+    <link rel="stylesheet" href="/Componentes/barra_lateral.css">
+    <link rel="stylesheet" href="/Componentes/input-de-texto.css">
+    <link rel="stylesheet" href="/Componentes/input-dropdown.css">
+    <link rel="stylesheet" href="./tela-criar-fornecedor.css">
+    <link rel="stylesheet" href="/Componentes/botoes.css">
+
+</head>
+
+<body>
+    <aside id="barra-lateral">
             <div id="conteudo-barra-lateral">
                 <nav id="nav-barra-lateral">
                     <ul>
@@ -26,5 +33,30 @@
                 <a href="/index.html"><img id="nav-bar-exit-icon" src="/Recursos/exit-icon.svg" alt="Icone sair"></a>
             </div>
         </aside>
-    </body>
+    <main>
+        <div class="main-content">
+            <div class="main-content-options-div">
+                <input class="input input-de-texto" type="text" placeholder="Nome do Fornecedor">
+            </div>
+            <div class="main-content-options-div">
+                <input class="input input-de-texto" type="text" placeholder="Telefone">
+            </div>
+            <div class="main-content-options-div">
+                <input class="input input-de-texto" type="text" placeholder="Email">
+            </div>
+            <div class="main-content-options-div">
+                <input class="input input-de-texto" type="text" placeholder="Endereço">
+            </div>
+            <div class="main-content-options-div">
+                <input class="input input-de-texto" type="text" placeholder="CNPJ">
+            </div>
+            <div class="tela-criar-fornecedor-botoes-div">
+                <button class="botao">Criar</button>
+                <button class="botao botao-branco">Voltar</button>
+            </div>
+
+        </div>
+    </main>
+</body>
+
 </html>

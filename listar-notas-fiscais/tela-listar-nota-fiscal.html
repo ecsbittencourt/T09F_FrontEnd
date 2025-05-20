@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/globals.css">
+    <link rel="stylesheet" href="/Componentes/barra_lateral.css">
+    <link rel="stylesheet" href="/Componentes/input-de-texto.css">
+    <link rel="stylesheet" href="/Componentes/input-dropdown.css">
+    <link rel="stylesheet" href="/Componentes/botoes.css">
+    <link rel="stylesheet" href="/Componentes/barra-pesquisa.css">
+    <link rel="stylesheet" href="/Componentes/tabela.css">
+    <link rel="stylesheet" href="./tela-listar-nota-fiscal.css">
+
+</head>
+
+<body>
+    <aside id="barra-lateral">
+            <div id="conteudo-barra-lateral">
+                <nav id="nav-barra-lateral">
+                    <ul>
+                        <li class="paragrafo1"><a href="/listar-estoques/tela-listar-estoques.html">Estoques</a></li>
+                        <li class="paragrafo1"><a href="/listar-fornecedores/tela-listar-fornecedores.html">Fornecedores</a></li>
+                        <li class="paragrafo1"><a href="/listar-medicamentos/tela-listar-medicamentos.html">Medicamentos</a></li>
+                        <li class="paragrafo1"><a href="/listar-setores/tela-listar-setores.html">Setor</a></li>
+                        <li class="paragrafo1"><a href="/listar-salas/tela-listar-salas.html">Salas</a></li>
+                        <li class="paragrafo1"><a href="/listar-armazenamentos/tela-listar-armazenamentos.html">Armazenamentos</a></li>
+                        <li class="paragrafo1"><a href="/listar-notas-fiscais/tela-listar-nota-fiscal.html">Notas fiscais</a></li>
+                        <li class="paragrafo1"><a href="/listar-tipo-armazenamento/tela-listar-tipo-armazenamento.html">Tipo Armazenamento</a></li>
+                        <li class="paragrafo1"><a href="/listar-tipo-estoque/tela-listar-tipo-estoque.html">Tipo Estoque</a></li>
+                        <li class="paragrafo1"><a href="/listar-tipo-medicamentos/tela-listar-tipo-medicamento.html">Tipo Medicamento</a></li>
+                    </ul>
+                </nav>
+                <a href="/index.html"><img id="nav-bar-exit-icon" src="/Recursos/exit-icon.svg" alt="Icone sair"></a>
+            </div>
+        </aside>
+    <main>
+        <div class="main-content">
+            <div class="main-content-top-bar">
+                <h1 class="titulo2">Notas Fiscais</h1>
+                <div class="novo-e-barra-de-pesquisa-div">
+                    <button class="botao"><a href="/cadastrar-nota-fiscal/tela-criar-nota-fiscal.html">Novo</a></button>
+                    <div class="caixa">
+                        <input type="text" class="input" placeholder="Pesquisar">
+                        <button> <img src="/Recursos/Lupa.svg" alt="Lupa" class="lupa"> </button>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="tabela-listagem">
+                    <thead class="tabela-listagem-head">
+                        <tr class="tabela-listagem-head-row">
+                            <th class="titulo3">Número</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-listagem-body">
+                        <tr class="tabela-listagem-body-row">
+                            <td class="paragrafo3">12345</td>
+                            <td class="tabela-listagem-edit-remove-icons">
+                                <button><img src="/Recursos/lapis-icon.png" alt=""></button>
+                                <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                            </td>
+                        </tr>
+                        <tr class="tabela-listagem-body-row">
+                            <td class="paragrafo3">54321</td>
+                            <td class="tabela-listagem-edit-remove-icons">
+                                <button><img src="/Recursos/lapis-icon.png" alt=""></button>
+                                <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+
+</html>

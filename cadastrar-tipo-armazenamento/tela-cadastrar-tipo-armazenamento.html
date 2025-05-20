@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/globals.css">
+    <link rel="stylesheet" href="/Componentes/barra_lateral.css">
+    <link rel="stylesheet" href="/Componentes/input-de-texto.css">
+    <link rel="stylesheet" href="/Componentes/input-dropdown.css">
+    <link rel="stylesheet" href="./tela-cadastrar-tipo-armazenamento.css">
+    <link rel="stylesheet" href="/Componentes/botoes.css">
+
+</head>
+
+<body>
+    <aside id="barra-lateral">
+            <div id="conteudo-barra-lateral">
+                <nav id="nav-barra-lateral">
+                    <ul>
+                        <li class="paragrafo1"><a href="/listar-estoques/tela-listar-estoques.html">Estoques</a></li>
+                        <li class="paragrafo1"><a href="/listar-fornecedores/tela-listar-fornecedores.html">Fornecedores</a></li>
+                        <li class="paragrafo1"><a href="/listar-medicamentos/tela-listar-medicamentos.html">Medicamentos</a></li>
+                        <li class="paragrafo1"><a href="/listar-setores/tela-listar-setores.html">Setor</a></li>
+                        <li class="paragrafo1"><a href="/listar-salas/tela-listar-salas.html">Salas</a></li>
+                        <li class="paragrafo1"><a href="/listar-armazenamentos/tela-listar-armazenamentos.html">Armazenamentos</a></li>
+                        <li class="paragrafo1"><a href="/listar-notas-fiscais/tela-listar-nota-fiscal.html">Notas fiscais</a></li>
+                        <li class="paragrafo1"><a href="/listar-tipo-armazenamento/tela-listar-tipo-armazenamento.html">Tipo Armazenamento</a></li>
+                        <li class="paragrafo1"><a href="/listar-tipo-estoque/tela-listar-tipo-estoque.html">Tipo Estoque</a></li>
+                        <li class="paragrafo1"><a href="/listar-tipo-medicamentos/tela-listar-tipo-medicamento.html">Tipo Medicamento</a></li>
+                    </ul>
+                </nav>
+                <a href="/index.html"><img id="nav-bar-exit-icon" src="/Recursos/exit-icon.svg" alt="Icone sair"></a>
+            </div>
+        </aside>
+    <main>
+        <div class="divisao-tela">
+            <div class="main-content">
+                <div class="main-content-options-div">
+                    <input class="input input-de-texto" type="text" placeholder="Nome tipo">
+
+                </div>
+                <div class="tela-cadastrar-tipo-armazenamento-botoes-div">
+                    <button class="botao">Criar</button>
+                    <button class="botao botao-branco">Cancelar</button>
+                </div>
+
+            </div>
+            <div class="borda">
+                <div class="borda-externa-content">
+                    <div class="borda-externa-content-options">
+                        <div class="input input-dropdown">
+                            <select id="dropdown" name="options">
+                                <option value="Opção 1">Tipo Medicamento 1</option>
+                                <option value="Opção 2">Tipo Medicamento 2</option>
+                                <option value="Opção 3">Tipo Medicamento 3</option>
+                            </select>
+                        </div>
+                        <input class="input input-de-texto" type="text" placeholder="Capacidade">
+
+
+                        <button class="botao botao-branco-add">+ Adicionar capacidade</button>
+
+                    </div>
+                    <div class="borda-interna">
+
+
+                        <table>
+                            <thead class="tabela-listagem-tipos-medicamento">
+                                <tr class="tabela-listagem-head-row">
+                                    <th class="titulo">Tipo</th>
+                                    <th class="titulo">Quantidade</th>
+                                    <th class="titulo"></th>
+
+                                </tr>
+                            <tbody class="tabela-listagem-body">
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+                                <tr class="tabela-listagem-body-row">
+                                    <td class="paragrafo3">Comprimido</td>
+                                    <td class="paragrafo3">40</td>
+                                    <td class="tabela-listagem-edit-remove-icons">
+                                        <button><img src="/Recursos/lixo-icon.png" alt=""></button>
+                                    </td>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>
