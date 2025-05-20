@@ -15,8 +15,8 @@ const handleCreateEvent = (event) => {
             return;
         }
         localStorage.setItem("t09f_papeis", JSON.stringify([...currPapeis, papel]));
-        return;
     }
+    document.getElementById("input-papel").value = "";
 }
 
 let criarBtn = document.getElementById("botao-criar-papel");
