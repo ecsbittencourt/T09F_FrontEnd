@@ -33,29 +33,16 @@ main {
 }
 
 
-table {
-
-    overflow-x: auto;
-    padding: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    
-}
-
-
-td {
-    padding: 8px 8px;
-    text-align: center;
-    
-}
-th{
-    width: 30px;
-}
-
 .table-container {
     overflow-x: auto;
+    max-width: 29rem;
+    padding-left: 4%;
     
     
+}
+
+.tabela-listagem td, .tabela-listagem th {
+    text-align: start;
 }
 
 
