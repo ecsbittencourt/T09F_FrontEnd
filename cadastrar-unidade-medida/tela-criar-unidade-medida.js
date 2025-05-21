@@ -1,28 +1,54 @@
-const handleCreateEvent = (event) => {
-    let currMedida = JSON.parse(localStorage.getItem("t09f_Medida"));
-    let Uni_Medida = document.getElementById("input-Medida").value;
-    if(!Uni_Medida) {
+let btnCriar = document.getElementById("botao-criar-unidade-medida");
+let inputunidadeMedida = document.getElementById("input-unidade-medida");
+
+ const handleCriarunidadeMedida = (event) => {
+    let newValue = inputunidadeMedida.value;
+    if (!newValue) {
         event.preventDefault();
-        alert (" Unidade de Medida inválido!");
+        alert("Nome da unidade de medida inválido!");
         return;
     }
-    if (!Array.isArray(currMedida)){
-         localStorage.setItem("t09f_Medida", JSON.stringify([Uni_Medida]));
-    } else {
-        if(currMedida.includes(Uni_Medida)) {
-            event.preventDefault();
-            alert("Unidade de Medida já existe!");
-            return;
-        }
-         localStorage.setItem("t09f_Medida", JSON.stringify([...currMedida, Uni_Medida]));
+
+    let retrieved = JSON.parse(localStorage.getItem("t09f-unidadeMedida"));
+    if (!retrieved) {
+        localStorage.setItem("t09f-unidadeMedida", JSON.stringify({
+            nextIndex: 2,
+            values: [{
+                id: 1,
+                value: newValue
+            }]
+        }));
+        inputunidadeMedida.value = "";
+        return;
     }
-    document.getElementById("input-Medida").value = "";
-    
+
+    let { nextIndex, values } = retrieved;
+    let newUnidadeMedida = { id: nextIndex, value: newValue };
+
+    let filtered = values.filter((unidade) => {
+        console.log(unidade, newUnidadeMedida);
+        return compareUnidadeMedida(unidade, newUnidadeMedida);
+    });
+    console.log(filtered);
+
+    if (filtered.length > 0) {
+        alert("Unidade de medida já existe!");
+        return;
+    }
+
+    localStorage.setItem("t09f-unidadeMedida", JSON.stringify({
+        nextIndex: ++nextIndex,
+        values: [
+            ...values,
+            newUnidadeMedida
+        ]
+    }));
+    inputunidadeMedida.value = "";
+ };
+
+    btnCriar.addEventListener("click", handleCriarunidadeMedida);
+
+
+    function compareUnidadeMedida(a, b) {
+        return a.value.toLowerCase() === b.value.toLowerCase(); 
 }
-    let criarBtn = document.getElementById("botao-criar-Unidade-Medida");
-    criarBtn.addEventListener("click", e => handleCreateEvent(e));
-    document.getElementById("input-Medida").addEventListener("keydown", e =>{
-     if(e.key == 'Enter'){
-        handleCreateEvent(e)
-    };        
-});
