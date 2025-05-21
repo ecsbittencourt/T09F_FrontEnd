@@ -1,55 +1,72 @@
-let handleCreateFornecedor = (event) => {
-    event.preventDefault();
+// tela-criar-fornecedor.js
+// Script para a tela de criar fornecedor: criar novo ou editar existente
 
-    let nome = document.getElementById("input-nome").value.trim();
-    let telefone = document.getElementById("input-telefone").value.trim();
-    let email = document.getElementById("input-email").value.trim();
-    let cnpj = document.getElementById("input-cnpj").value.trim();
+const LS_KEY = "hospital_fornecedores";
 
-    if (!nome || !telefone || !email || !cnpj) {
-        alert("Preencha todos os campos!");
-        return;
-    }
+function getFornecedores() {
+  const data = localStorage.getItem(LS_KEY);
+  return data ? JSON.parse(data) : [];
+}
 
-    let data = JSON.parse(localStorage.getItem("t09f_fornecedores"));
+function saveFornecedores(fornecedores) {
+  localStorage.setItem(LS_KEY, JSON.stringify(fornecedores));
+}
 
-    if (!data || !Array.isArray(data.fornecedores)) {
-        data = {
-            nextId: 2,
-            fornecedores: [
-                { id: 1, nome, telefone, email, cnpj }
-            ]
-        };
-        localStorage.setItem("t09f_fornecedores", JSON.stringify(data));
-        alert("Fornecedor salvo com sucesso!");
-    } else {
-        let { nextId, fornecedores } = data;
+function preencherFormularioParaEditar() {
+  const index = localStorage.getItem("hospital_fornecedor_editar_index");
+  const dados = localStorage.getItem("hospital_fornecedor_editar_dados");
 
-        let jaExiste = fornecedores.some(f => f.cnpj === cnpj);
-        if (jaExiste) {
-            alert("Fornecedor com este CNPJ já existe!");
-            return;
-        }
+  if (index !== null && dados) {
+    const fornecedor = JSON.parse(dados);
 
-        fornecedores.push({ id: nextId, nome, telefone, email, cnpj });
-        localStorage.setItem("t09f_fornecedores", JSON.stringify({
-            nextId: nextId + 1,
-            fornecedores
-        }));
+    document.getElementById("input-nome").value = fornecedor.nome;
+    document.getElementById("input-telefone").value = fornecedor.telefone;
+    document.getElementById("input-email").value = fornecedor.email;
+    document.getElementById("input-cnpj").value = fornecedor.cnpj;
 
-        alert("Fornecedor salvo com sucesso!");
-    }
+    document.getElementById("botao-criar-fornecedor").textContent = "Salvar";
+  }
+}
 
-    document.getElementById("input-nome").value = "";
-    document.getElementById("input-telefone").value = "";
-    document.getElementById("input-email").value = "";
-    document.getElementById("input-cnpj").value = "";
-};
+function criarOuSalvarFornecedor() {
+  const nome = document.getElementById("input-nome").value.trim();
+  const telefone = document.getElementById("input-telefone").value.trim();
+  const email = document.getElementById("input-email").value.trim();
+  const cnpj = document.getElementById("input-cnpj").value.trim();
 
-document.getElementById("botao-criar-fornecedor").addEventListener("click", handleCreateFornecedor);
+  if (!nome || !telefone || !email || !cnpj) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
 
-["input-nome", "input-telefone", "input-email", "input-cnpj"].forEach(id => {
-    document.getElementById(id).addEventListener("keydown", (e) => {
-        if (e.key === "Enter") handleCreateFornecedor(e);
-    });
+  let fornecedores = getFornecedores();
+  const index = localStorage.getItem("hospital_fornecedor_editar_index");
+
+  if (index !== null) {
+    fornecedores[index] = { nome, telefone, email, cnpj };
+    alert("Fornecedor atualizado com sucesso!");
+  } else {
+    fornecedores.push({ nome, telefone, email, cnpj });
+    alert("Fornecedor criado com sucesso!");
+  }
+
+  saveFornecedores(fornecedores);
+
+  localStorage.removeItem("hospital_fornecedor_editar_index");
+  localStorage.removeItem("hospital_fornecedor_editar_dados");
+
+  window.location.href = "/listar-fornecedores/tela-listar-fornecedores.html";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  preencherFormularioParaEditar();
+
+  document.getElementById("botao-criar-fornecedor").addEventListener("click", criarOuSalvarFornecedor);
+
+  document.querySelector(".botao.botao-branco").addEventListener("click", () => {
+    localStorage.removeItem("hospital_fornecedor_editar_index");
+    localStorage.removeItem("hospital_fornecedor_editar_dados");
+
+    window.location.href = "/listar-fornecedores/tela-listar-fornecedores.html";
+  });
 });
