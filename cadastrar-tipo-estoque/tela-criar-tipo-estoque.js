@@ -10,10 +10,10 @@ const handleEditTipoEstoque = (e) => {
         return;
     }
 
-    
-    let {nextIndex, values} = JSON.parse(localStorage.getItem("t09f-tipo-estoque"));
+
+    let { nextIndex, values } = JSON.parse(localStorage.getItem("t09f-tipo-estoque"));
     let filtered = (values.filter((tipoEstoque) => {
-        return compareTipoEstoque(tipoEstoque, {value:newValue});
+        return compareTipoEstoque(tipoEstoque, { value: newValue });
     }));
     if (filtered.length > 0) {
         alert("Tipo estoque já existe!");
@@ -21,14 +21,14 @@ const handleEditTipoEstoque = (e) => {
     }
 
     const otherValues = values.filter(value => !(value.id == editId));
-    if(otherValues.length === values.length) {
+    if (otherValues.length === values.length) {
         alert("Erro! Id não existente!");
         return;
     }
 
     localStorage.setItem("t09f-tipo-estoque", JSON.stringify({
         nextIndex,
-        values: [...otherValues, {id: editId, value: newValue}]
+        values: [...otherValues, { id: editId, value: newValue }]
     }));
     inputTipoEstoque.value = "";
 
@@ -42,40 +42,9 @@ const handleCriarTipoEstoque = (event) => {
         return;
     }
 
-    let retrieved = JSON.parse(localStorage.getItem("t09f-tipo-estoque"));
-    if (!retrieved) {
-        localStorage.setItem("t09f-tipo-estoque", JSON.stringify({
-            nextIndex: 2,
-            values: [{
-                id: 1,
-                value: newValue
-            }]
-        }))
-        inputTipoEstoque.value = "";
-        return;
-    }
-
-    let { nextIndex, values } = retrieved;
-    let newTipoEstoque = { id: nextIndex, value: newValue };
-
-    let filtered = (values.filter((tipoEstoque) => {
-        console.log(tipoEstoque, newTipoEstoque);
-        return compareTipoEstoque(tipoEstoque, newTipoEstoque);
-    }));
-    console.log(filtered);
-    if (filtered.length > 0) {
-        alert("Tipo estoque já existe!");
-        return;
-    }
-    localStorage.setItem("t09f-tipo-estoque", JSON.stringify({
-        nextIndex: ++nextIndex,
-        values: [
-            ...values,
-            newTipoEstoque
-        ]
-    }));
+    postTipoEstoque({ nome: newValue });
     inputTipoEstoque.value = "";
-
+    return;
 }
 
 
@@ -100,11 +69,24 @@ inputTipoEstoque.addEventListener("keydown", e => {
     }
 })
 
-function removeTipoEstoque(values, id) {
 
-}
 
 function compareTipoEstoque(obj1, obj2) {
     if (obj1 === obj2) return true;
     return obj1["value"] == obj2["value"];
+}
+
+function postTipoEstoque(data) {
+    fetch("http://127.0.0.1:8080/api/tipos-estoque", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: JSON.stringify(data)
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    }).then(data => data);
 }
