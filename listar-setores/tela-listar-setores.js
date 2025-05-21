@@ -1,18 +1,18 @@
-// Recupera setores do localStorage
+// Função para buscar setores no localStorage
 function getSetores() {
   const obj = JSON.parse(localStorage.getItem("t09f_setores"));
   if (!obj || !Array.isArray(obj.values)) return [];
   return obj.values;
 }
 
-// Salva setores no localStorage mantendo nextIndex
+// Função para salvar setores no localStorage
 function setSetores(values) {
   const obj = JSON.parse(localStorage.getItem("t09f_setores")) || { nextIndex: 1 };
   obj.values = values;
   localStorage.setItem("t09f_setores", JSON.stringify(obj));
 }
 
-// Renderiza a tabela de setores
+// Função para renderizar a tabela com setores
 function renderSetores() {
   const setores = getSetores();
   const tbody = document.querySelector(".tabela-listagem-body");
@@ -36,11 +36,9 @@ function renderSetores() {
       excluirSetor(id);
     });
 
-    // Evento editar (aqui só alerta, pode ser adaptado depois)
+    // Evento editar - redireciona para a página de criação/edição com id do setor
     tr.querySelector(".btn-editar").addEventListener("click", () => {
-      alert(`Aqui você pode implementar a edição do setor de ID ${id} - "${value}"`);
-      // ou redirecione para página de edição se tiver, por exemplo:
-      // window.location.href = `/editar-setor.html?id=${id}`;
+      window.location.href = `/cadastrar-setor/tela-cadastrar-setor.html?editId=${id}`;
     });
 
     tbody.appendChild(tr);
