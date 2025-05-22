@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
         row.querySelector('.delete-button').addEventListener('click', () => {
             deleteUnidade(index);
         });
+
+        row.querySelector('.edit-button').addEventListener('click', () => {
+            Editeunidade(index);
+        });
     });
 
     function deleteUnidade(index) {
