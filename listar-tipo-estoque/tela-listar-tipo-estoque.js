@@ -1,7 +1,6 @@
 let retrieved;
 getTipoEstoque().then(data => {
     retrieved = data;
-    console.log(retrieved);
     let tipoEstoqueList = retrieved;
     let tabelaListagemBody = document.getElementById("tabela-listagem-body");
 
@@ -25,17 +24,17 @@ getTipoEstoque().then(data => {
         botaoDelete.addEventListener("click", e => {
             const clickedButton = e.target.tagName === 'IMG' ? e.target.parentElement : e.target;
             const id = clickedButton.parentElement.parentElement.children[0].textContent;
-            const { nextIndex, values } = JSON.parse(localStorage.getItem("t09f-tipo-estoque"));
 
-            localStorage.setItem("t09f-tipo-estoque", JSON.stringify({ nextIndex, values: values.filter(element => !(element["id"] == id)) }));
-            location.reload();
+            deleteTipoEstoque(id).then(() => {
+                location.reload();
+            });
+
         });
     })
 });
 async function getTipoEstoque() {
     let response = await fetch("http://127.0.0.1:8080/api/tipos-estoque");
-    if (!response) {
-        console.log("ERROOOO!");
+    if (!response.ok) {
         return null;
     } else {
         let data = await response.json();
@@ -45,15 +44,17 @@ async function getTipoEstoque() {
 
 
 
-function deleteTipoEstoque(id) {
-    fetch(`http://127.0.0.1:8080/api/tipos-estoque/${id}`, {
+async function deleteTipoEstoque(id) {
+    let response = await fetch(`http://127.0.0.1:8080/api/tipos-estoque/${id}`, {
         method: "DELETE",
         headers: {
         },
-    }).then(response => {
-        console.log(response);
-        if (!response.status == 204) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
     });
+    console.log(response)
+    if (!(response.status === 204)) {
+        console.log("Não 204!!!")
+        alert("Erro! Não foi possível deletar!");
+        throw new Error("Erro!")
+    }
+
 }
