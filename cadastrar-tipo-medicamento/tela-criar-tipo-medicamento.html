@@ -36,22 +36,21 @@
     <main>
         <div class="main-content">
             <div class="main-content-options-div">
-                <input class="input input-de-texto" type="text" placeholder="Nome: (ex: comprimido, ampola, ...)">
+                <input id="nome-tipo-medicamento-input" class="input input-de-texto" type="text" placeholder="Nome: (ex: comprimido, ampola, ...)">
             </div>
             <div class="input input-dropdown">
-                    <select class="dropdown" name="options">
+                    <select id="unidade-medida-select" class="dropdown" name="options">
                         <option value="" disabled selected hidden>Selecione a unidade de medida...</option>
-                        <option value="ml">ml</option>
-                        <option value="mg">mg</option>
                     </select>
                 </div>
             <div class="tela-criar-tipo-medicamento-botoes-div">
-                <button class="botao">Criar</button>
-                <button class="botao botao-branco">Voltar</button>
+                <button id="criar-tipo-medicamento-btn" class="botao">Criar</button>
+                <button class="botao botao-branco"><a href="/listar-tipo-medicamentos/tela-listar-tipo-medicamento.html">Voltar</a></button>
             </div>
 
         </div>
     </main>
+    <script src="./tela-criar-tipo-medicamento.js"></script>
 </body>
 
 </html>
