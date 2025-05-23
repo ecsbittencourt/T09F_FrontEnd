@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="/Componentes/barra_lateral.css">
     <link rel="stylesheet" href="/Componentes/input-de-texto.css">
     <link rel="stylesheet" href="/Componentes/input-dropdown.css">
-    <link rel="stylesheet" href="./tela-criar-status-mov-inte.css">
     <link rel="stylesheet" href="/Componentes/botoes.css">
+    <link rel="stylesheet" href="/Componentes/barra-pesquisa.css">
+    <link rel="stylesheet" href="/Componentes/tabela.css">
+    <link rel="stylesheet" href="./tela-listar-status-mov-interna.css">
 
 </head>
 
@@ -35,17 +37,35 @@
         </aside>
     <main>
         <div class="main-content">
-            <div class="main-content-options-div">
-                <input id="input-status-mov-inter" class="input input-de-texto" type="text" placeholder="Informe o status da movimentação">
+            <div class="main-content-top-bar">
+                <h1 class="titulo2">Status</h1>
+                <div class="novo-e-barra-de-pesquisa-div">
+                    <button class="botao"><a href="/cadastrar-status-mov-interna/tela-criar-status-mov-inte.html">Novo</a></button>
+                    <div class="caixa">
+                        <input type="text" class="input" placeholder="Pesquisar">
+                        <button> <img src="/Recursos/Lupa.svg" alt="Lupa" class="lupa"> </button>
+                    </div>
+                </div>
             </div>
-            <div class="tela-criar-status-mov-botoes-div">
-                <button id="criar-status-botao" class="botao">Criar</button>
-                <button class="botao botao-branco"><a href="/listar-status-mov-interna/tela-listar-status-mov-interna.html">Voltar</a></button>
+            <div class="table-container">
+                <table class="tabela-listagem">
+                    <thead class="tabela-listagem-head">
+                        <tr class="tabela-listagem-head-row">
+                            <th class="titulo3">Id</th>
+                            <th class="titulo3">Nome</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-listagem-body" class="tabela-listagem-body">
+                        
+                    </tbody>
+                </table>
             </div>
 
         </div>
+
     </main>
-    <script src="./tela-criar-status-mov-inte.js"></script>
+    <script src="./tela-listar-status-mov-interna.js" async></script>
 </body>
 
 </html>
