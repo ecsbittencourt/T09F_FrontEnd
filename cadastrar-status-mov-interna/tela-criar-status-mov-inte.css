@@ -49,6 +49,10 @@ p.paragrafo1 {
     color: var(--cor-primaria);
 }
 
+.tela-criar-status-mov-botoes-div a {
+    color: var(--cor-primaria);
+}
+
 @media screen and (max-width: 1100px) {
     html {
         font-size: 10px;
