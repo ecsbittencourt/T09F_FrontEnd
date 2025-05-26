@@ -1,59 +1,72 @@
-// Função para buscar setores no localStorage
-function getSetores() {
-  const obj = JSON.parse(localStorage.getItem("t09f_setores"));
-  if (!obj || !Array.isArray(obj.values)) return [];
-  return obj.values;
+async function listarSetores() {
+  try {
+    const response = await fetch("http://127.0.0.1:8080/api/setores");
+    const setores = await response.json();
+
+    const tbody = document.querySelector(".tabela-listagem-body");
+    tbody.innerHTML = "";
+
+    setores.forEach(({ id, nome }) => {
+      const tr = document.createElement("tr");
+      tr.classList.add("tabela-listagem-body-row");
+
+      tr.innerHTML = `
+        <td class="paragrafo3">${id}</td>
+        <td class="paragrafo3">${nome}</td>
+        <td class="tabela-listagem-edit-remove-icons">
+          <button onclick="editarSetor(${id}, '${nome}')" title="Editar">
+            <img src="/Recursos/lapis-icon.png" alt="Editar">
+          </button>
+          <button onclick="excluirSetor(${id})" title="Excluir">
+            <img src="/Recursos/lixo-icon.png" alt="Excluir">
+          </button>
+        </td>
+      `;
+
+      tbody.appendChild(tr);
+    });
+  } catch (error) {
+    alert("Erro ao listar setores.");
+  }
 }
 
-// Função para salvar setores no localStorage
-function setSetores(values) {
-  const obj = JSON.parse(localStorage.getItem("t09f_setores")) || { nextIndex: 1 };
-  obj.values = values;
-  localStorage.setItem("t09f_setores", JSON.stringify(obj));
-}
+async function excluirSetor(id) {
+  if (!confirm("Deseja excluir este setor?")) return;
 
-// Função para renderizar a tabela com setores
-function renderSetores() {
-  const setores = getSetores();
-  const tbody = document.querySelector(".tabela-listagem-body");
-  tbody.innerHTML = ""; // limpa tabela antes de inserir
-
-  setores.forEach(({ id, value }) => {
-    const tr = document.createElement("tr");
-    tr.classList.add("tabela-listagem-body-row");
-
-    tr.innerHTML = `
-      <td class="paragrafo3">${id}</td>
-      <td class="paragrafo3">${value}</td>
-      <td class="tabela-listagem-edit-remove-icons">
-        <button class="btn-editar" title="Editar"><img src="/Recursos/lapis-icon.png" alt="Editar"></button>
-        <button class="btn-excluir" title="Excluir"><img src="/Recursos/lixo-icon.png" alt="Excluir"></button>
-      </td>
-    `;
-
-    // Evento excluir
-    tr.querySelector(".btn-excluir").addEventListener("click", () => {
-      excluirSetor(id);
+  try {
+    const response = await fetch(`http://127.0.0.1:8080/api/setores/${id}`, {
+      method: "DELETE"
     });
 
-    // Evento editar - redireciona para a página de criação/edição com id do setor
-    tr.querySelector(".btn-editar").addEventListener("click", () => {
-      window.location.href = `/cadastrar-setor/tela-cadastrar-setor.html?editId=${id}`;
-    });
-
-    tbody.appendChild(tr);
-  });
+    if (response.ok) {
+      alert("Setor excluído com sucesso!");
+      listarSetores();
+    } else {
+      alert("Erro ao excluir setor.");
+    }
+  } catch (error) {
+    alert("Erro desconhecido ao excluir setor.");
+  }
 }
 
-// Função para excluir setor pelo id
-function excluirSetor(id) {
-  let setores = getSetores();
-  setores = setores.filter(setor => setor.id !== id);
-  setSetores(setores);
-  renderSetores();
+function editarSetor(id, nomeAtual) {
+  const novoNome = prompt("Digite o novo nome do setor:", nomeAtual);
+  if (!novoNome || !novoNome.trim()) return;
+
+  fetch(`http://127.0.0.1:8080/api/setores/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome: novoNome.trim() })
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("Setor atualizado com sucesso!");
+      listarSetores();
+    } else {
+      alert("Erro ao atualizar setor.");
+    }
+  })
+  .catch(() => alert("Erro desconhecido ao atualizar setor."));
 }
 
-// Inicializa renderização ao carregar a página
-window.addEventListener("DOMContentLoaded", () => {
-  renderSetores();
-});
+window.addEventListener("DOMContentLoaded", listarSetores);
