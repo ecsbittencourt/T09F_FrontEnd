@@ -29,7 +29,7 @@ async function cadastrarSalaAPI() {
         numero: parseInt(numeroSala),
         idSetor: parseInt(setorId)
     };
- 
+    console.log(sala);
     try {
         const response = await fetch("http://127.0.0.1:8080/api/salas", {
             method: "POST",
