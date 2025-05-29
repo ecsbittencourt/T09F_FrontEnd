@@ -6,18 +6,8 @@ async function carregarSalasEMapearSetores() {
   try {
     const baseURL = "http://127.0.0.1:8080/api";
 
-    // Buscar setores para mapear id -> nome
-    const resSetores = await fetch(`${baseURL}/setores`);
-    if (!resSetores.ok) throw new Error("Erro ao carregar setores");
-    const setores = await resSetores.json();
-
-    const mapaSetores = {};
-    setores.forEach(s => {
-      mapaSetores[s.id] = s.nome;
-    });
-
     // Buscar salas
-    const resSalas = await fetch(`${baseURL}/salas`);
+    const resSalas = await fetch(`${baseURL}/salas-e-setores`);
     if (!resSalas.ok) throw new Error("Erro ao carregar salas");
     const salas = await resSalas.json();
 
@@ -26,15 +16,13 @@ async function carregarSalasEMapearSetores() {
     tabelaBody.innerHTML = "";
 
     salas.forEach(sala => {
-      const setorId = sala.idSetor ?? sala.id_t09f_setor;
-      const nomeSetor = mapaSetores[setorId] || "Setor desconhecido";
 
       const row = document.createElement("tr");
       row.classList.add("tabela-listagem-body-row");
 
       row.innerHTML = `
         <td class="paragrafo3">Sala ${sala.numero}</td>
-        <td class="paragrafo3">${nomeSetor}</td>
+        <td class="paragrafo3">${sala.nomeSetor}</td>
         <td class="tabela-listagem-edit-remove-icons">
           <button class="btn-editar" data-id="${sala.id}">
             <img src="/Recursos/lapis-icon.png" alt="Editar">
