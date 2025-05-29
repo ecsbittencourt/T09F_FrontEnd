@@ -1,97 +1,81 @@
+document.addEventListener("DOMContentLoaded", async function () {
+    const codigoInput = document.getElementById("codigo-input");
+    const setorDropdown = document.getElementById("setor-dropdown");
+    const salaDropdown = document.getElementById("sala-dropdown");
+    const tipoArmazenamentoDropdown = document.getElementById("tipo-armazenamento-dropdown");
+    const botaoCriar = document.getElementById("botao-criar");
+    const botaoCancelar = document.getElementById("botao-cancelar");
 
-document.addEventListener("DOMContentLoaded", function () {
-    const dropdowns = document.querySelectorAll("select.dropdown");
+    async function carregarDropdown(endpoint, dropdown) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/${endpoint}`);
+            if (!response.ok) throw new Error("Erro ao buscar dados");
+            const dados = await response.json();
 
-    const setores = JSON.parse(localStorage.getItem("setores")) || [];
-    const salas = JSON.parse(localStorage.getItem("salas")) || [];
-    const tiposArmazenamento = JSON.parse(localStorage.getItem("tiposArmazenamento")) || [];
-    //const medicamentos = JSON.parse(localStorage.getItem("medicamentos")) || [];
-
-    const setorDropdown = dropdowns[0];
-    const salaDropdown = dropdowns[1];
-    const tipoArmazenamentoDropdown = dropdowns[2];
-    const medicamentoDropdown = dropdowns[3];
-
-    function preencherDropdown(dropdown, lista) {
-        lista.forEach(function(item) {
-            const option = document.createElement("option");
-            option.value = item.id;
-            option.textContent = item.nome;
-            dropdown.appendChild(option);
-        });
+            dados.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.id;
+                option.textContent = item.nome;
+                dropdown.appendChild(option);
+            });
+        } catch (error) {
+            alert("Erro ao carregar dados: " + error.message);
+        }
     }
 
-    preencherDropdown(setorDropdown, setores);
-    preencherDropdown(salaDropdown, salas);
-    preencherDropdown(tipoArmazenamentoDropdown, tiposArmazenamento);
-    //preencherDropdown(medicamentoDropdown, medicamentos);
+    async function carregarDropdownSala(endpoint, dropdown) {
+        try {
+            const response = await fetch(`http://localhost:8080/api/${endpoint}`);
+            if (!response.ok) throw new Error("Erro ao buscar dados");
+            const dados = await response.json();
 
-    const armazenamentoEditando = JSON.parse(localStorage.getItem("armazenamentoEditando"));
-    const codigoInput = document.querySelector("input.input-de-texto");
-    //const quantidadeInput = document.querySelector("input.input-quantidade");
-
-    if (armazenamentoEditando) {
-        codigoInput.value = armazenamentoEditando.codigo;
-        setorDropdown.value = armazenamentoEditando.setorId;
-        salaDropdown.value = armazenamentoEditando.salaId;
-        tipoArmazenamentoDropdown.value = armazenamentoEditando.tipoArmazenamentoId;
-        //medicamentoDropdown.value = armazenamentoEditando.medicamentoId;
-        //if (quantidadeInput) {
-        //    quantidadeInput.value = armazenamentoEditando.quantidade || 0;
-        //}
-
-        const botao = document.querySelector(".botao");
-        botao.textContent = "Atualizar";
+            dados.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.id;
+                option.textContent = item.numero;
+                dropdown.appendChild(option);
+            });
+        } catch (error) {
+            alert("Erro ao carregar dados: " + error.message);
+        }
     }
 
-    const botaoCriar = document.querySelector(".botao");
-    if (botaoCriar) {
-        botaoCriar.addEventListener("click", function () {
-            const codigo = codigoInput.value.trim();
-            const setorId = parseInt(setorDropdown.value);
-            const salaId = parseInt(salaDropdown.value);
-            const tipoId = parseInt(tipoArmazenamentoDropdown.value);
-           // const medicamentoId = parseInt(medicamentoDropdown.value);
-            //const quantidade = quantidadeInput ? parseInt(quantidadeInput.value) : 0;
+    await carregarDropdown("setores", setorDropdown);
+    await carregarDropdownSala("salas", salaDropdown);
+    await carregarDropdown("tipos-armazenamento", tipoArmazenamentoDropdown);
 
-            if (!codigo || !setorId || !salaId || !tipoId ) {
-                alert("Por favor, preencha todos os campos antes de salvar.");
-                return;
-            }
+    botaoCriar.addEventListener("click", async function () {
+        const codigo = codigoInput.value.trim();
+        const idSala = salaDropdown.value;
+        const idTipoArmazenamento = tipoArmazenamentoDropdown.value;
 
-            const armazenamentos = JSON.parse(localStorage.getItem("armazenamentos")) || [];
+        if (!codigo || !idSala || !idTipoArmazenamento) {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
 
-            const novoArmazenamento = {
-                id: armazenamentoEditando ? armazenamentoEditando.id : Date.now(),
-                codigo,
-                setorId,
-                salaId,
-                tipoArmazenamentoId: tipoId,
-                
-            };
+        const armazenamento = {
+            codigo,
+            idSala,
+            idTipoArmazenamento
+        };
 
-            if (armazenamentoEditando) {
-                const index = armazenamentos.findIndex(a => a.id === armazenamentoEditando.id);
-                if (index !== -1) {
-                    armazenamentos[index] = novoArmazenamento;
-                }
-            } else {
-                armazenamentos.push(novoArmazenamento);
-            }
+        try {
+            const response = await fetch("http://localhost:8080/api/armazenamentos", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(armazenamento)
+            });
 
-            localStorage.setItem("armazenamentos", JSON.stringify(armazenamentos));
-            localStorage.removeItem("armazenamentoEditando");
-
+            if (!response.ok) throw new Error("Erro ao salvar armazenamento");
             alert("Armazenamento salvo com sucesso!");
             window.location.href = "/listar-armazenamentos/tela-listar-armazenamentos.html";
-        });
-    }
+        } catch (error) {
+            alert("Erro ao salvar: " + error.message);
+        }
+    });
 
-    const botaoCancelar = document.querySelector(".botao.botao-branco");
-    if (botaoCancelar) {
-        botaoCancelar.addEventListener("click", () => {
-            localStorage.removeItem("armazenamentoEditando");
-            window.location.href = "/listar-armazenamentos/tela-listar-armazenamentos.html";
-        });
-    }
+    botaoCancelar.addEventListener("click", () => {
+        window.location.href = "/listar-armazenamentos/tela-listar-armazenamentos.html";
+    });
 });
