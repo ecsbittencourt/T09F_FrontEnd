@@ -9,11 +9,12 @@ loadTipoMedicamentoOptions();
 
 const botaoAdicionarCapacidade = document.getElementById("botao-adicionar-capacidade");
 botaoAdicionarCapacidade.addEventListener("click", e => {
-    const newId = selectTipoMedicamento.options[selectTipoMedicamento.selectedIndex].value;
+    const newId = parseInt(selectTipoMedicamento.options[selectTipoMedicamento.selectedIndex].value);
     const newNome = selectTipoMedicamento.options[selectTipoMedicamento.selectedIndex].innerText;
-    const capacidade = inputCapacidade.value;
+    const capacidade = parseInt(inputCapacidade.value);
 
     const existList = listaCapacidades.find(capacidade => capacidade.id === newId);
+    console.log("Lista capacidades: " + listaCapacidades);
     if (existList) {
         alert("Erro! Tipo já adicionado!");
         return;
@@ -45,7 +46,6 @@ if (editId) {
         let tipoArmazenamento = response[0];
         let tiposMedicamentos = response[1];
         inputNomeTipoArmazenamento.value = tipoArmazenamento.nome;
-        console.log(tiposMedicamentos)
         tiposMedicamentos.forEach(capacidade => {
             listaCapacidades.push({
                 id: capacidade.idTipoMedicamento,
@@ -72,8 +72,9 @@ if (editId) {
     const botaoCriar = document.getElementById("botao-criar");
     botaoCriar.addEventListener("click", e => {
         handleBotaoEditar(e);
-        
+        window.location.assign("http://127.0.0.1:5500/listar-tipo-armazenamento/tela-listar-tipo-armazenamento.html");
     });
+    console.log(listaCapacidades)
 } else {
     // CRIAR NOVO
     const botaoCriar = document.getElementById("botao-criar");
@@ -133,6 +134,7 @@ function handleBotaoCriar(e) {
             throw new Error("Erro! Status:" + response.status)
         }
     })
+    console.log("Post body: " + criarPostBody());
 }
 
 function handleBotaoEditar(e) {
@@ -152,8 +154,9 @@ function handleBotaoEditar(e) {
             alert("Erro! Não foi possível criar.")
             throw new Error("Erro! Status:" + response.status)
         }
-        window.location.assign("http://127.0.0.1:5500/listar-tipo-armazenamento/tela-listar-tipo-armazenamento.html");
+        
     })
+    console.log("Post body: " + criarPostBody());
 
 }
 
