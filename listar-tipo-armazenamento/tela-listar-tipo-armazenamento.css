@@ -41,7 +41,9 @@ main {
 .table-container td, .table-container th {
     text-align: start;
 }
-
+.tabela-listagem-edit-remove-icons img{
+    width: 100%;
+}
 @media screen and (max-width: 1100px) {
     html {
         font-size: 10px;

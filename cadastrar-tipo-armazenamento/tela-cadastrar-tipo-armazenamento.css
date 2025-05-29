@@ -44,6 +44,11 @@ p.paragrafo1 {
 
 }
 
+.tela-cadastrar-tipo-armazenamento-botoes-div a{
+    color: var(--cor-primaria)
+}
+
+
 .tela-cadastrar-tipo-armazenamento-botoes-div .botao {
     max-width: 35%;
     height: 3.5rem;
@@ -74,8 +79,6 @@ p.paragrafo1 {
     border: .2rem solid var(--cor-primaria);
     color: var(--cor-primaria);
     align-items: center;
-
-
 }
 
 
