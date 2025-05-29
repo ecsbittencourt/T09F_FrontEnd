@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const baseURL = "http://127.0.0.1:8080/api";
 
-  // Função para carregar setores no select
+  // Carrega os setores para o dropdown
   async function carregarSetores() {
     try {
       const res = await fetch(`${baseURL}/setores`);
@@ -24,24 +24,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         selectSetor.appendChild(option);
       });
 
-      if (!editId) {
-        selectSetor.value = "";
-      }
+      if (!editId) selectSetor.value = "";
     } catch (error) {
       alert("Erro ao carregar setores: " + error.message);
       console.error("Erro ao carregar setores:", error);
     }
   }
 
-  // Função para carregar dados da sala para edição
+  // Carrega dados da sala para edição
   async function carregarSala(id) {
     try {
-      console.log("Carregando sala com id:", id);
-
-      // Verifica se id é número válido antes do fetch
-      if (!id || isNaN(id)) {
-        throw new Error("ID inválido para carregar a sala");
-      }
+      if (!id || isNaN(id)) throw new Error("ID inválido para carregar a sala");
 
       const res = await fetch(`${baseURL}/salas/${id}`);
       if (!res.ok) throw new Error(`Erro ao buscar sala: ${res.status} ${res.statusText}`);
@@ -65,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     selectSetor.value = "";
   }
 
-  // Função para criar ou atualizar sala
+  // Cria ou atualiza sala
   async function cadastrarOuAtualizarSala() {
     const numero = parseInt(inputNumero.value);
     const idSetor = parseInt(selectSetor.value);
@@ -94,12 +87,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Erro na requisição");
+        if (response.status === 409) {
+          alert("Já existe uma sala com este número. Escolha outro número e tente novamente.");
+          return;
+        }
+
+        try {
+          const errorJson = await response.json();
+          alert("Erro: " + (errorJson.message || "Erro desconhecido."));
+        } catch {
+          alert("Erro desconhecido ao processar a resposta do servidor.");
+        }
+        return;
       }
 
       alert(editId ? "Sala atualizada com sucesso!" : "Sala criada com sucesso!");
       window.location.href = "/listar-salas/tela-listar-salas.html";
+
     } catch (err) {
       alert("Erro: " + err.message);
       console.error("Erro ao criar/atualizar sala:", err);
