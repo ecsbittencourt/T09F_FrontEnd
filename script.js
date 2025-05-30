@@ -1,43 +1,96 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const senhaInput = document.getElementById("senha-input");
+    senhaInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            handleLogin(event);
+        }
+    });
+
+    const botaoLogin = document.getElementById("botao-login");
+    botaoLogin.addEventListener("click", e => {
+        handleLogin(e);
+    });
+
+    const botaoCriar = document.getElementById("botao-criar");
+    botaoCriar.addEventListener("click", e => {
+        handleCriar(e).then(
+            response => {
+                if (!(response.status === 201)) {
+                    alert("Erro ao criar!");
+                    throw new Error("Erro ao criar");
+                }
+                return response.json();
+            }
+        ).then(data => {
+            localStorage.setItem("usuarioLogado", JSON.stringify({ usuario: data.nome }));
+            window.location.href = "/listar-medicamentos/tela-listar-medicamentos.html"
+        });
+
+    })
+});
+
+
+
+function handleCriar(e) {
+    const usuarioDigitado = document.getElementById("login-input").value;
+    const senhaDigitada = document.getElementById("senha-input").value;
+    validarInputs(usuarioDigitado, senhaDigitada);
+    return fetch("http://127.0.0.1:8080/api/auth/usuario", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: JSON.stringify({
+            nome: usuarioDigitado,
+            digestSenha: senhaDigitada
+        })
+    })
+}
+
+function handleLogin(e) {
+    validarLogin(e);
+}
+
+function validarInputs(usuarioDigitado, senhaDigitada) {
+    if (!usuarioDigitado || !senhaDigitada) {
+        alert("Erro! Algum valor digitado não é valido.");
+        throw new Error("Erro! Algum valor digitado não é valido.");
+    }
+}
+
 function validarLogin(event) {
     event.preventDefault();
 
     const usuarioDigitado = document.getElementById("login-input").value;
     const senhaDigitada = document.getElementById("senha-input").value;
-
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    const usuarioValido = usuarios.find(user =>
-        user.usuario === usuarioDigitado && user.senha === senhaDigitada
-    );
-
-    if (usuarioValido) {
-        window.location.href = "/listar-medicamentos/tela-listar-medicamentos.html";
-        /*SALVA ID DO USUARIO LOGADO*/
-        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioValido));
-    } else {
-        alert("Usuário ou senha incorretos.");
+    try {
+        validarInputs(usuarioDigitado, senhaDigitada);
+        getUsuario(usuarioDigitado, senhaDigitada).then(data => {
+            localStorage.setItem("usuarioLogado", JSON.stringify({ data }));
+            window.location.href = "/listar-medicamentos/tela-listar-medicamentos.html"
+        });
+    } catch (error) {
+        alert("Não foi possível fazer o login!");
+        return;
     }
 }
 
-/*TECLA ENTER TER A MESMA FUNÇÃO QUE O BOTÃO LOGIN*/
-document.addEventListener("DOMContentLoaded", function () {
-    const senhaInput = document.getElementById("senha-input");
 
-    senhaInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            validarLogin(event);
-        }
+
+
+async function getUsuario(usuario, senha) {
+    const response = await fetch("http://127.0.0.1:8080/api/auth/login", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8'
+        },
+        body: JSON.stringify({ nome: usuario, digestSenha: senha })
     });
-});
 
-/*
-    UAUÁRIOS INSERIDOS NO LOCAL STORAGE PARA VALIDAÇÃO DO LOGIN E SENHA
-    const usuarios = [
-    { id: 1, usuario: "admin", senha: "1234" },
-    { id: 2, usuario: "joao", senha: "senha123" },
-    { id: 3, usuario: "maria", senha: "abc123" }
-];
+    if (!(response.ok)) {
+        alert("Erro! Não foi possível validar o usuário. Tente novamente.");
+        throw new Error("Erro! Não foi possível validar o usuário.");
+    }
 
-localStorage.setItem("usuarios", JSON.stringify(usuarios));
-
-*/
+    return response.json();
+}
