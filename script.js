@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ).then(data => {
             localStorage.setItem("usuarioLogado", JSON.stringify({ usuario: data.nome }));
-            window.location.href = "/listar-medicamentos/tela-listar-medicamentos.html"
+            window.location.href = "/listar-setores/tela-listar-setores.html"
         });
 
     })
@@ -67,7 +67,7 @@ function validarLogin(event) {
         validarInputs(usuarioDigitado, senhaDigitada);
         getUsuario(usuarioDigitado, senhaDigitada).then(data => {
             localStorage.setItem("usuarioLogado", JSON.stringify({ data }));
-            window.location.href = "/listar-medicamentos/tela-listar-medicamentos.html"
+            window.location.href = "/listar-setores/tela-listar-setores.html"
         });
     } catch (error) {
         alert("Não foi possível fazer o login!");
