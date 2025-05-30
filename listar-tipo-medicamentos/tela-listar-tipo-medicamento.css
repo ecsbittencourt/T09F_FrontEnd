@@ -2,7 +2,7 @@ main {
     max-width: 100%;
     min-height: 100vh;
     height: 100%;
-    padding-left: 18%;
+    padding-left: 20%;
 }
 
 .main-content {
@@ -55,9 +55,7 @@ main {
 
 @media screen and (max-width: 940px) {
     
-    html {
-        font-size: 8px;
-    }
+
     #barra-lateral {
         max-width: 30%;
     }
@@ -67,9 +65,9 @@ main {
     
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     html {
-        font-size: 6px;
+        font-size: 8px;
     }
 }
 
