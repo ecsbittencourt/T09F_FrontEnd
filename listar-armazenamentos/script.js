@@ -1,12 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
     try {
-        const [armazenamentos, salas, tiposArmazenamento] = await Promise.all([
-            fetchDados("/api/armazenamentos"),
-            fetchDados("/api/salas"),
-            fetchDados("/api/tipos-armazenamento")
-        ]);
+        const armazenamentos = await fetchDados("/api/armazenamentos")
 
-        renderizarTabela(armazenamentos, salas, tiposArmazenamento);
+        renderizarTabela(armazenamentos);
     } catch (error) {
         console.error("Erro ao carregar dados:", error);
     }
@@ -22,31 +18,32 @@ function encontrarPorId(lista, id) {
     return lista.find(item => item.id === id) || null;
 }
 
-function renderizarTabela(armazenamentos, salas, tiposArmazenamento) {
+function renderizarTabela(armazenamentos) {
     const tbody = document.querySelector(".tabela-listagem-body");
     tbody.innerHTML = "";
 
     armazenamentos.forEach((armazenamento) => {
-        const sala = encontrarPorId(salas, armazenamento.idSala);
-        const tipo = encontrarPorId(tiposArmazenamento, armazenamento.idTipoArmazenamento);
 
         const row = document.createElement("tr");
         row.classList.add("tabela-listagem-body-row");
 
         row.innerHTML = `
             <td class="paragrafo3">${armazenamento.codigo}</td>
-            <td class="paragrafo3">${sala ? sala.nome : "Sala não encontrada"}</td>
-            <td class="paragrafo3">${tipo ? tipo.nome : "Tipo não encontrado"}</td>
-            <td class="tabela-listagem-edit-remove-icons">
-                <button class="editar"><img src="/Recursos/lapis-icon.png" alt="Editar"></button>
-                <button class="deletar"><img src="/Recursos/lixo-icon.png" alt="Deletar"></button>
-            </td>
+                            <td class="paragrafo3">${armazenamento.nomeTipoArmazenamento}</td>
+                            <td class="paragrafo3">${armazenamento.numeroSala}</td>
+                            <td class="paragrafo3">${armazenamento.nomeSetor}</td>
+                            <td class="paragrafo3">${armazenamento.nomeMedicamento}</td>
+                            <td class="paragrafo3">${armazenamento.quantidade}</td>
+                            <td class="tabela-listagem-edit-remove-icons">
+                                <button class="editar"><img src="/Recursos/lapis-icon.png" alt=""></button>
+                                <button class="deletar"><img src="/Recursos/lixo-icon.png" alt=""></button>
+                            </td>
         `;
 
         // Editar
         row.querySelector(".editar").addEventListener("click", function () {
             localStorage.setItem("armazenamentoEditando", JSON.stringify(armazenamento));
-            window.location.href = "/cadastrar-armazenamento/tela-criar-armazenamento.html";
+            window.location.href = "/cadastrar-armazenamento/tela-criar-armazenamento.html?editId="+armazenamento.id;
         });
 
         // Deletar
