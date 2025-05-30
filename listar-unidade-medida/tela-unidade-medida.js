@@ -5,7 +5,6 @@ async function listarUnidades() {
 
     const tbody = document.querySelector(".tabela-listagem-body");
     tbody.innerHTML = "";
-
     unidades.forEach(({ id, medida }) => {
       const tr = document.createElement("tr");
       tr.classList.add("tabela-listagem-body-row");
@@ -56,4 +55,6 @@ async function excluirUnidade(id) {
   }
 }
 
-window.addEventListener("DOMContentLoaded", listarUnidades);
+window.addEventListener("DOMContentLoaded", async () => {
+  await listarUnidades();
+} );
