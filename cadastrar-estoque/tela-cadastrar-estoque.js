@@ -16,6 +16,12 @@ async function buscarSalas() {
   return res.json();
 }
 
+async function buscarEstoque(id) {
+  const res = await fetch("http://127.0.0.1:8080/api/estoques/" + id);
+  if (!res.ok) throw new Error("Erro ao buscar estoque!");
+  return res.json();
+}
+
 function popularSelect(idSelect, dados, textoPadrao) {
   const select = document.getElementById(idSelect);
   select.innerHTML = `<option value="" disabled selected hidden>${textoPadrao}</option>`;
@@ -29,6 +35,7 @@ function popularSelect(idSelect, dados, textoPadrao) {
 }
 
 async function inicializar() {
+  let editId = new URLSearchParams(window.location.search).get("editId");
   try {
     const tiposEstoque = await buscarTiposEstoque();
     popularSelect("select-tipo-estoque", tiposEstoque, "Selecione o tipo de estoque...");
@@ -38,8 +45,55 @@ async function inicializar() {
 
     const salas = await buscarSalas();
     popularSelect("select-sala", salas, "Selecione a sala...");
+    if (editId) {
+      buscarEstoque(editId).then(estoque => {
+        document.getElementById("input-nome-estoque").value = estoque.nome;
+        document.getElementById("select-tipo-estoque").value = estoque.idTipoEstoque;
+        document.getElementById("select-setor").value = estoque.idSetor;
+        document.getElementById("select-sala").value = estoque.idSala;
+      })
+
+    }
   } catch (error) {
     alert("Erro ao carregar dados para os selects: " + error.message);
+  }
+}
+
+async function editarEstoque(id) {
+  const nome = document.getElementById("input-nome-estoque").value.trim();
+  const tipoEstoqueId = document.getElementById("select-tipo-estoque").value;
+  const setorId = document.getElementById("select-setor").value;
+  const salaId = document.getElementById("select-sala").value;
+
+  if (!nome || !tipoEstoqueId || !setorId || !salaId) {
+    alert("Por favor, preencha todos os campos.");
+    return;
+  }
+
+  const body = {
+    id: id,
+    nome: nome,
+    idTipoEstoque: parseInt(tipoEstoqueId),
+    idSetor: parseInt(setorId),
+    idSala: parseInt(salaId)
+  };
+
+  try {
+    const response = await fetch("http://127.0.0.1:8080/api/estoques/"+id, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+
+    if (response.ok) {
+      alert("Estoque editado com sucesso!");
+      window.location.href = "/listar-estoques/tela-listar-estoques.html";
+    } else {
+      const erro = await response.json();
+      alert("Erro ao criar estoque: " + erro);
+    }
+  } catch (error) {
+    alert("Erro de comunicação: ");
   }
 }
 
@@ -56,9 +110,9 @@ async function criarEstoque() {
 
   const body = {
     nome: nome,
-    id_t09f_tipo_estoque: parseInt(tipoEstoqueId),
-    id_t09f_setor: parseInt(setorId),
-    id_t09f_sala: parseInt(salaId)
+    idTipoEstoque: parseInt(tipoEstoqueId),
+    idSetor: parseInt(setorId),
+    idSala: parseInt(salaId)
   };
 
   try {
@@ -83,7 +137,12 @@ async function criarEstoque() {
 document.addEventListener("DOMContentLoaded", () => {
   inicializar();
 
-  document.getElementById("btn-criar-estoque").addEventListener("click", criarEstoque);
+  let editId = new URLSearchParams(window.location.search).get("editId");
+  if (!editId) {
+    document.getElementById("btn-criar-estoque").addEventListener("click", criarEstoque);
+  } else {
+    document.getElementById("btn-criar-estoque").addEventListener("click", () => editarEstoque(editId))
+  }
 
   document.getElementById("btn-cancelar").addEventListener("click", () => {
     window.location.href = "/listar-estoques/tela-listar-estoques.html";

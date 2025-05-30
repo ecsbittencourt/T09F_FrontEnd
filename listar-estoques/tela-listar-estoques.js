@@ -1,61 +1,43 @@
-document.addEventListener("DOMContentLoaded", () => {
-  carregarEstoques();
+document.addEventListener("DOMContentLoaded", async () => {
+  await carregarEstoques();
 });
 
 async function carregarEstoques() {
   const baseURL = "http://127.0.0.1:8080/api";
 
   try {
-    // Buscar tipos de estoque
-    const resTipos = await fetch(`${baseURL}/estoques/tipos`);
-    if (!resTipos.ok) throw new Error("Erro ao buscar tipos de estoque");
-    const tiposEstoque = await resTipos.json();
-
-    // Criar mapa id -> nome do tipo de estoque
-    const mapaTiposEstoque = {};
-    tiposEstoque.forEach(tipo => {
-      mapaTiposEstoque[tipo.id] = tipo.nome;
-    });
-
-    // Buscar salas
-    const resSalas = await fetch(`${baseURL}/estoques/salas`);
-    if (!resSalas.ok) throw new Error("Erro ao buscar salas");
-    const salas = await resSalas.json();
-
-    // Criar mapa id -> número da sala
-    const mapaSalas = {};
-    salas.forEach(sala => {
-      mapaSalas[sala.id] = sala.numero;
-    });
-
     // Buscar estoques
     const resEstoques = await fetch(`${baseURL}/estoques`);
-    if (!resEstoques.ok) throw new Error("Erro ao buscar estoques");
+    if (!resEstoques.ok) {
+      alert("Erro ao buscar estoques!");      
+      throw new Error("Erro ao buscar estoques");
+    }
     const estoques = await resEstoques.json();
-
     // Popular tabela
     const tabelaBody = document.querySelector(".tabela-listagem-body");
     tabelaBody.innerHTML = "";
 
+    console.log(estoques)
     estoques.forEach(estoque => {
-      const tipoEstoqueNome = mapaTiposEstoque[estoque.id_t09f_tipo_estoque] || "Desconhecido";
-      const numeroSala = mapaSalas[estoque.id_t09f_sala] || "Desconhecida";
-
       const row = document.createElement("tr");
       row.classList.add("tabela-listagem-body-row");
 
       row.innerHTML = `
-        <td class="paragrafo3">${estoque.nome}</td>
-        <td class="paragrafo3">${tipoEstoqueNome}</td>
-        <td class="paragrafo3">Sala ${numeroSala}</td>
-        <td class="tabela-listagem-edit-remove-icons">
-          <button class="btn-editar" data-id="${estoque.id}">
+      <td class="paragrafo3">${estoque.nome}</td>
+                            <td class="paragrafo3">${estoque.nomeTipoEstoque}</td>
+                            <td class="paragrafo3">${estoque.nomeSetor}</td>
+                            <td class="paragrafo3">${estoque.numeroSala}</td>
+                            <td class="tabela-listagem-edit-remove-icons">
+                                <button class="btn-editar" data-id="${estoque.id}">
             <img src="/Recursos/lapis-icon.png" alt="Editar">
           </button>
           <button class="btn-remover" data-id="${estoque.id}">
             <img src="/Recursos/lixo-icon.png" alt="Remover">
           </button>
-        </td>
+                            </td>
+        
+          
+        
       `;
 
       tabelaBody.appendChild(row);
