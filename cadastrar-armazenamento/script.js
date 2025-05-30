@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             codigoInput.value = armazenamento.codigo;
             salaDropdown.value = armazenamento.idSala;
             tipoArmazenamentoDropdown.value = armazenamento.idTipoArmazenamento;
+            setorDropdown.value = armazenamento.idSetor;
 
             botaoCriar.textContent = "Salvar";
         } catch (error) {
